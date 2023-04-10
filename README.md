@@ -6,14 +6,14 @@
 
 ## Object 
 
-- поле  <Coordinates cord> - хранит текущие координаты через class Coordinates
-- поле <int Id> - хранит id объекта 
-- поле <Coordinates *memory> - хранить все координаты
+- поле  ```shCoordinates cord``` - хранит текущие координаты через class Coordinates
+- поле ```shint Id``` - хранит id объекта 
+- поле ```shCoordinates *memory``` - хранить все координаты
 
 ## Coordinates
 
-- поле <int _x> - координата Х
-- поле <int _y> - координата Y 
+- поле ```shint _x``` - координата Х
+- поле ```shint _y``` - координата Y 
 
 
 ## Windows vs Linux
