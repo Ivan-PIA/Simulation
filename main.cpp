@@ -1,6 +1,7 @@
 #include "simulation.h"
 
 int main(){
+    
     srand(time(NULL));
     int i,j,objt,x,y, chek=0, count_obj, count_mov, id, scale, choice, mov;
      cout << "\nВведите масштаб : ";
@@ -35,4 +36,5 @@ int main(){
     interface_distance(stek,count_obj,scale,count_mov);
 	
     delete[] stek;
+
 }
