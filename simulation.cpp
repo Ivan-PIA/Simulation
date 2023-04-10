@@ -114,7 +114,7 @@ int find(int id1, int id2, Object *stek, int count_obj, int count_mov, int scale
 	int i, j,rast, a,b,d, x1,y1, x2,y2, way1,way2;
 	
     for(i=0;i<count_obj;i++){
-        if(id1 == stek[i].getId()){ //находит координаты указанных объектов
+        if(id1 == stek[i].getId()){ 
 			x1=stek[i].GetX();
 			y1=stek[i].GetY();
 			way1 = stek[i].lengthWay(count_mov, scale);
@@ -126,10 +126,10 @@ int find(int id1, int id2, Object *stek, int count_obj, int count_mov, int scale
 		}
 	}
 
-    cout << "\nКоординаты 1 точки " << x1<<", "<< y1<<")";
-	cout << "\nКоординаты 2 точки " << x2<<", "<< y2<<")";
-	cout << "\nПройденное расстояние 1 точки (" <<way1<<"метров"<<endl;
-	cout << "\nПройденное расстояние 2 точки (" <<way2<<"метров"<<endl;
+    cout << "\nКоординаты 1 точки " << x1<<", "<< y1<<"";
+	cout << "\nКоординаты 2 точки " << x2<<", "<< y2<<"";
+	cout << "\nПройденное расстояние 1 точки: " <<way1<<"метров"<<endl;
+	cout << "\nПройденное расстояние 2 точки:" <<way2<<"метров"<<endl;
 	rast=sqrt(pow((x2-x1),2)+ pow((y2-y1),2));
 	return rast;
 }
@@ -137,20 +137,28 @@ int find(int id1, int id2, Object *stek, int count_obj, int count_mov, int scale
 void paint_2 (int count_obj, int mov, int scale, Object  *stek, int i, int j){
     int chek=0,objt;
         for(objt=0; objt < count_obj; objt++){
-            if(i==((stek[objt].memoryGet_Y(mov))/scale) && j == ((stek[objt].memoryGet_X(mov))/scale)){ //если встречается координата объекта
+            if(i==((stek[objt].memoryGet_Y(mov))/scale) && j == ((stek[objt].memoryGet_X(mov))/scale)){ 
                 cout << objt+1;
                 chek=1;
             }
-            else if ((i!=((stek[objt].memoryGet_Y(mov))/scale) || j != ((stek[objt].memoryGet_X(mov))/scale)) && (chek == 0)) 
-                chek = 0;
+            else if ((i!=((stek[objt].memoryGet_Y(mov))/scale) || j != ((stek[objt].memoryGet_X(mov))/scale)) && (chek == 0)) {
+                chek=0;
+                if (i==0 || j==0 || i==SIZE/scale-1 || j==SIZE/scale-1){
+                    chek=2;
+                
+            }
+           
+            }
         }
 
         if(chek==0) 
-            cout << " "; //если объект не встретился
+            cout << " "; 
+        if(chek==2)
+            cout<< "+";
 }
 
 void paint (int scale, int mov, int count_obj, Object *stek ){
-    	sleep(1); // задержка 1 секунда
+    	sleep(1); 
         system("cls");
         for(int i=0;i<(SIZE/scale);i++){
             for(int j=0;j<(SIZE/scale);j++){
@@ -208,15 +216,15 @@ void interface_distance (Object *stek, int count_obj, int scale, int count_mov) 
 
     int id_1,id_2, rasst;
 	while(choice!=2){
-        cout<< "\n\nХотите узнать расстояние между точками?1-Da 2-Net : ";
+        cout<< "\n\nРасстояние между точками?1-начало 2-конец : ";
 		cin >> choice;
 		if(choice == 1){
-            cout << ("\nВведите ID 1точки: ");
+            cout << ("\nID 1точки: ");
 			cin >> id_1;
-			cout << ("\nВведите ID 2точки: ");
+			cout << ("\nID 2точки: ");
 			cin >> id_2;
 			rasst=find(id_1,id_2,stek,count_obj, count_mov,scale);
-            cout << "\n\nРасстояние между точками равно " << rasst << "метров" << endl;
+            cout << "\n\nРасстояние между точками равно: " << rasst << "метров" << endl;
 		}
         else if(choice == 2) {
             cout << "\nПрограмма завершена";
@@ -242,41 +250,3 @@ void choice_method(int choice, Object *stek, int count_obj, int scale, int count
 
 }
          
-
-
-int main(){
-    srand(time(NULL));
-    int i,j,objt,x,y, chek=0, count_obj, count_mov, id, scale, choice, mov;
-     cout << "\nВведите масштаб : ";
-    cin >> scale;
-    cout << "\nВведите количество объектов: ";
-    cin >> count_obj;
-    cout << "\nВведите количество движений: ";
-    cin >> count_mov;
-
-
-
-    Object *stek = new Object[count_obj]; //выделение памяти для массива
-     
-     for(i=0;i<count_obj;i++){
-         stek[i].memoryInit(count_mov);
-    }
-
-    setting_id(count_obj,stek);
-   
-    setting_coord(count_obj, scale, stek);
-    
-
-    cout << "\n---------------------------- " <<endl; 
-    system("pause");
-
-    choice_method(1,stek,count_obj,scale,count_mov);
-
-    for(mov=0; mov < count_mov; mov++){
-		paint(scale,mov, count_obj, stek);
-    }
-
-    interface_distance(stek,count_obj,scale,count_mov);
-	
-    delete[] stek;
-}
