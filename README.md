@@ -49,4 +49,8 @@ g++ main.cpp simulation.cpp -o pro
 
 [![Build Status](https://github.com/Ivan-PIA/Simulation/blob/main/2-path.png)]
 
+Обновленное поле:
+
+[![Build Status](https://github.com/Ivan-PIA/Simulation/blob/main/modern.png)]
+
 
