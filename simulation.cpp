@@ -92,13 +92,13 @@ void rando(Object *stek, int count_obj, int count_mov, int scale){ //рандо�
             if(direct == 0){ //На месте
              stek[obj].move(0, scale, i);
             }
-            if(direct == 1 && stek[obj].GetY()+ scale < SIZE){
+            if(direct == 1 && stek[obj].GetY()+ scale < SIZE/scale){
                 stek[obj].move(1, scale, i);
             }
             if(direct == 2 && stek[obj].GetX() - scale > 0){
                 stek[obj].move(2, scale, i);
             }
-            if(direct == 3 && stek[obj].GetX() + scale < SIZE){
+            if(direct == 3 && stek[obj].GetX() + scale < SIZE/scale){
                 stek[obj].move(3, scale, i);
             }
              if(direct == 4 && stek[obj].GetY()- scale > 0){
@@ -138,7 +138,7 @@ void paint_2 (int count_obj, int mov, int scale, Object  *stek, int i, int j){
     int chek=0,objt;
         for(objt=0; objt < count_obj; objt++){
             if(i==((stek[objt].memoryGet_Y(mov))/scale) && j == ((stek[objt].memoryGet_X(mov))/scale)){ 
-                cout << objt+1;
+                cout << " "<< objt+1;
                 chek=1;
             }
             else if ((i!=((stek[objt].memoryGet_Y(mov))/scale) || j != ((stek[objt].memoryGet_X(mov))/scale)) && (chek == 0)) {
@@ -152,9 +152,9 @@ void paint_2 (int count_obj, int mov, int scale, Object  *stek, int i, int j){
         }
 
         if(chek==0) 
-            cout << " "; 
+            cout << "  "; 
         if(chek==2)
-            cout<< "+";
+            cout<< " +";
 }
 
 void paint (int scale, int mov, int count_obj, Object *stek ){
